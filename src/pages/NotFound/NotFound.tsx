@@ -1,7 +1,7 @@
 import React from 'react'
 
-import './styles.css'
-import Page from '../../components/Page'
+import Page from '../../components/Page/Page'
+import './styles.scss'
 
 const NotFound = () => (
   <Page className="NotFound">
