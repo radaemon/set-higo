@@ -1,9 +1,11 @@
-import React, { FC } from 'react';
+import React, { ReactNode } from 'react';
 
-interface Props {
-  children: React.ReactNode;
-}
+type Props = {
+  children: ReactNode;
+};
 
-export const Board: FC<Props> = () => {
+const Board = ({ children }: Props) => {
   return <div></div>;
 };
+
+export default Board;

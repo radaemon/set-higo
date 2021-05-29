@@ -1,10 +1,11 @@
 import React from 'react';
 
 import Page from '../../components/Page/Page';
+import Board from '../../components/Board/Board';
 
 const Play = () => (
   <Page className="">
-    <p>here goes the game</p>
+    <Board />
   </Page>
 );
 

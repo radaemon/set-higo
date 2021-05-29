@@ -1,14 +1,14 @@
-import React, { FC } from 'react';
+import React from 'react';
 
 import './styles.scss';
 
-interface Props {
+type Props = {
   color: Number;
   shape: Number;
   texture: Number;
   quantity: Number;
-}
+};
 
-const Card: FC<Props> = () => <></>;
+const Card = ({ color, shape, texture, quantity }: Props) => <></>;
 
 export default Card;
