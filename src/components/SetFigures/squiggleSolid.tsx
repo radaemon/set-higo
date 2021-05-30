@@ -1,6 +1,11 @@
 import React from 'react';
 
-export default function squiggleSolid(color: string, quantity: number) {
+type Props = {
+  color: string;
+  quantity: number;
+};
+
+export default function SquiggleSolid({ color, quantity }: Props) {
   const figure = (
     <svg
       width="67px"

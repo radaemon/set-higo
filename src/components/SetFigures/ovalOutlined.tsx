@@ -1,6 +1,11 @@
 import React from 'react';
 
-export default function ovalOutlined(color: string, quantity: number) {
+type Props = {
+  color: string;
+  quantity: number;
+};
+
+export default function OvalOutlined({ color, quantity }: Props) {
   const figure = (
     <svg
       width="75px"

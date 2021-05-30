@@ -1,6 +1,11 @@
 import React from 'react';
 
-export const ovalSolid = (color: string, quantity: number) => {
+type Props = {
+  color: string;
+  quantity: number;
+};
+
+export default function OvalSolid({ color, quantity }: Props) {
   const figure = (
     <svg
       width="75px"
@@ -25,5 +30,5 @@ export const ovalSolid = (color: string, quantity: number) => {
     </svg>
   );
 
-  return <div className="card-container">{Array(quantity).map(() => figure)}</div>;
-};
+  return <>{Array(quantity).map(() => figure)}</>;
+}

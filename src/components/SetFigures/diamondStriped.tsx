@@ -1,6 +1,11 @@
 import React from 'react';
 
-export default function diamondStriped(color: string, quantity: number) {
+type Props = {
+  color: string;
+  quantity: number;
+};
+
+export default function DiamondStriped({ color, quantity }: Props) {
   const figure = (
     <svg
       width="75px"

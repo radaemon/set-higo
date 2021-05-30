@@ -1,6 +1,11 @@
 import React from 'react';
 
-export default function squiggleStriped(color: string, quantity: number) {
+type Props = {
+  color: string;
+  quantity: number;
+};
+
+export default function SquiggleStriped({ color, quantity }: Props) {
   const figure = (
     <svg
       width="71px"
