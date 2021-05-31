@@ -2,6 +2,8 @@
 import React from 'react';
 import Card from '../Card/Card';
 
+import './styles.scss';
+
 type Props = {
   shownCards: {
     color: 1 | 2 | 3;
@@ -21,18 +23,7 @@ const Board = ({ shownCards }: Props) => {
       key={i}
     />
   ));
-  return (
-    <div
-      className="board"
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'auto auto auto',
-        maxWidth: '30%',
-      }}
-    >
-      {cards}
-    </div>
-  );
+  return <div className="board">{cards}</div>;
 };
 
 export default Board;

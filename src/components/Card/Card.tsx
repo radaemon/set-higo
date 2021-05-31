@@ -32,9 +32,9 @@ const components = {
 } as const;
 
 const colors = {
-  1: 'red',
-  2: 'green',
-  3: 'purple',
+  1: '#f93b41',
+  2: '#46914A',
+  3: '#A033CD',
 } as const;
 
 const Card = ({ color, shape, texture, quantity }: Props) => {
@@ -42,18 +42,7 @@ const Card = ({ color, shape, texture, quantity }: Props) => {
   const ComponentToRender = components[`${shape}${texture}` as const];
 
   return (
-    <div
-      className="card"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderStyle: 'solid',
-        borderColor: 'gray',
-        width: '120px',
-        height: '100px',
-      }}
-    >
+    <div className="card">
       <ComponentToRender color={stringColor} quantity={quantity} />
     </div>
   );

@@ -8,8 +8,8 @@ type Props = {
 export default function SquiggleSolid({ color, quantity }: Props) {
   const figure = (
     <svg
-      width="40px"
-      height="80px"
+      width="25px"
+      height="50px"
       viewBox="0 0 67 176"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"

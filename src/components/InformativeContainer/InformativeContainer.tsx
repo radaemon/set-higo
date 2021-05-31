@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './styles.scss';
+
 type Props = {
   color: string;
   children: string;
@@ -7,10 +9,7 @@ type Props = {
 
 export default function InformativeContainer({ color, children }: Props) {
   return (
-    <div
-      style={{ backgroundColor: color }}
-      className={`informative-container-${color}`}
-    >
+    <div className={`informative-container ${color}`}>
       <p>{children}</p>
     </div>
   );

@@ -1,0 +1,14 @@
+.informative-container {
+  margin-bottom: 50px;
+  width: 350px;
+  border: 1px solid red;
+  border-radius: 5px;
+  text-align: center;
+  &.red {
+    background-color: red;
+  }
+
+  &.blue {
+    background-color: blue;
+  }
+}

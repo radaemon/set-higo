@@ -1,2 +1,12 @@
-.diamond-solid {
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  border-color: gray;
+  width: 100px;
+  height: 60px;
+  box-shadow: 2px 2px 2px grey;
 }

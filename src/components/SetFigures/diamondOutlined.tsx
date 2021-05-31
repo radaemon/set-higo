@@ -8,8 +8,8 @@ type Props = {
 export default function DiamondOutlined({ color, quantity }: Props) {
   const figure = (
     <svg
-      width="18px"
-      height="45px"
+      width="23px"
+      height="50px"
       viewBox="0 0 75 180"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
