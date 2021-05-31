@@ -9,4 +9,7 @@
   width: 100px;
   height: 60px;
   box-shadow: 2px 2px 2px grey;
+  &.selected {
+    background-color: #ddf2f6;
+  }
 }

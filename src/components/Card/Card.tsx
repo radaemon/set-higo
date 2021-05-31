@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 
 import DiamondOutlined from '../SetFigures/DiamondOutlined';
@@ -42,7 +44,7 @@ const Card = ({ color, shape, texture, quantity }: Props) => {
   const ComponentToRender = components[`${shape}${texture}` as const];
 
   return (
-    <div className="card">
+    <div className="card" onClick={(e) => console.log(e)}>
       <ComponentToRender color={stringColor} quantity={quantity} />
     </div>
   );
