@@ -1,14 +1,18 @@
 .informative-container {
   margin-bottom: 50px;
   width: 350px;
-  border: 1px solid red;
   border-radius: 5px;
   text-align: center;
+  visibility: hidden;
   &.red {
-    background-color: red;
+    background-color: #f7d7da;
+    color: #711e26;
+    visibility: visible;
   }
 
   &.blue {
-    background-color: blue;
+    background-color: #cde5fe;
+    visibility: visible;
+    color: #4f779f;
   }
 }

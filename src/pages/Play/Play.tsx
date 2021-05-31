@@ -34,7 +34,7 @@ const Play = () => {
     <div
       style={{ display: 'flex', flexDirection: 'column', marginTop: '100px' }}
     >
-      <InformativeContainer color="red">
+      <InformativeContainer color="blue">
         Informative Content Here
       </InformativeContainer>
       <Board shownCards={shownCards} />
