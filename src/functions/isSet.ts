@@ -5,6 +5,20 @@ type DeckObject = {
   texture: 1 | 2 | 3;
 };
 
+function areAllEqual([prop1, prop2, prop3]: (1 | 2 | 3)[]) {
+  if (prop1 === prop2 && prop1 === prop3 && prop3 === prop2) {
+    return true;
+  }
+  return false;
+}
+
+function areAllDifferent([prop1, prop2, prop3]: (1 | 2 | 3)[]) {
+  if (prop1 !== prop2 && prop1 !== prop3 && prop3 !== prop2) {
+    return true;
+  }
+  return false;
+}
+
 export default function isSet(
   object1: DeckObject,
   object2: DeckObject,
@@ -19,4 +33,10 @@ export default function isSet(
   const isShapeValid = areAllDifferent(shapes) || areAllEqual(shapes);
   const isTextureValid = areAllDifferent(textures) || areAllEqual(textures);
   const isQuantityValid = areAllDifferent(quantity) || areAllEqual(quantity);
+
+  if (isColorValid && isShapeValid && isTextureValid && isQuantityValid) {
+    return true;
+  }
+
+  return false;
 }
