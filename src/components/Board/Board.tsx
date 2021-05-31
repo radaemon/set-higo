@@ -1,12 +1,18 @@
-import React, { ReactNode } from 'react';
+/* eslint-disable react/no-array-index-key */
+import React from 'react';
 import Card from '../Card/Card';
 
 type Props = {
-  shownCards: Object[];
-  selectedCards: Object[];
+  shownCards: {
+    color: number;
+    quantity: number;
+    shape: number;
+    texture: number;
+  }[];
+  // selectedCards: object[];
 };
 
-const Board = ({ shownCards, selectedCards }: Props) => {
+const Board = ({ shownCards }: Props) => {
   const cards = shownCards.map((card, i) => (
     <Card
       color={card.color}
@@ -14,6 +20,7 @@ const Board = ({ shownCards, selectedCards }: Props) => {
       shape={card.shape}
       texture={card.texture}
       key={i}
+      isSelected={false}
     />
   ));
   return <div>{cards}</div>;

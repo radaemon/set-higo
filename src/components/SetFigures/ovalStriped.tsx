@@ -37,5 +37,5 @@ export default function OvalStriped({ color, quantity }: Props) {
       </g>
     </svg>
   );
-  return <div className="card-container">{Array(quantity).map(() => figure)}</div>;
+  return <>{Array(quantity).map(() => figure)}</>;
 }

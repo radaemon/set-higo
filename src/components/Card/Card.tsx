@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 
 import DiamondOutlined from '../SetFigures/DiamondOutlined';
@@ -14,9 +13,9 @@ import SquiggleStriped from '../SetFigures/SquiggleStriped';
 import './styles.scss';
 
 type Props = {
-  color: 1 | 2 | 3;
-  shape: 1 | 2 | 3;
-  texture: 1 | 2 | 3;
+  color: number;
+  shape: number;
+  texture: number;
   quantity: number;
   isSelected: boolean;
 };
@@ -43,7 +42,11 @@ const Card = ({ color, shape, texture, quantity, isSelected }: Props) => {
   const stringColor = colors[color];
   const ComponentToRender = components[`${shape}${texture}` as const];
 
-  return <ComponentToRender color={stringColor} quantity={quantity} />;
+  return (
+    <div className="card">
+      <ComponentToRender color={stringColor} quantity={quantity} />;
+    </div>
+  );
 };
 
 export default Card;

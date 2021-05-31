@@ -1,10 +1,10 @@
-const createDeck = (quantity: number, colors: number, shapes: number, textures: number) => {
+const createDeck = () => {
   const deck = [];
 
-  for (let i = 1; i <= quantity; i++) {
-    for (let j = 1; j <= colors; j++) {
-      for (let k = 1; k <= shapes; k++) {
-        for (let m = 1; m <= textures; m++) {
+  for (let i = 1; i <= 3; i++) {
+    for (let j = 1; j <= 3; j++) {
+      for (let k = 1; k <= 3; k++) {
+        for (let m = 1; m <= 3; m++) {
           deck.push({
             quantity: i,
             color: j,
