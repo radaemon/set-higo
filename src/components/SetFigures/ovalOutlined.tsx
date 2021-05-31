@@ -8,8 +8,8 @@ type Props = {
 export default function OvalOutlined({ color, quantity }: Props) {
   const figure = (
     <svg
-      width="75px"
-      height="179px"
+      width="40px"
+      height="80px"
       viewBox="0 0 75 179"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +18,13 @@ export default function OvalOutlined({ color, quantity }: Props) {
       <title>Oval - Outlined</title>
       <desc>Created with Sketch.</desc>
       <defs />
-      <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+      <g
+        id="Page-1"
+        stroke="none"
+        strokeWidth="1"
+        fill="none"
+        fillRule="evenodd"
+      >
         <path
           d="M-15,56.5 C-33.2253967,56.5 -48,71.2746033 -48,89.5 C-48,107.725397 -33.2253967,122.5 -15,122.5 L90,122.5 C108.225397,122.5 123,107.725397 123,89.5 C123,71.2746033 108.225397,56.5 90,56.5 L-15,56.5 Z M-15,52.5 L90,52.5 C110.434536,52.5 127,69.0654643 127,89.5 C127,109.934536 110.434536,126.5 90,126.5 L-15,126.5 C-35.4345357,126.5 -52,109.934536 -52,89.5 C-52,69.0654643 -35.4345357,52.5 -15,52.5 Z"
           id="Oval---Outlined"
@@ -29,5 +35,11 @@ export default function OvalOutlined({ color, quantity }: Props) {
       </g>
     </svg>
   );
-  return <>{Array(quantity).map(() => figure)}</>;
+  return (
+    <>
+      {Array(quantity)
+        .fill(0)
+        .map(() => figure)}
+    </>
+  );
 }

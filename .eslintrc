@@ -13,6 +13,7 @@
     }
   },
   "rules": {
+    "no-console": "off",
     "object-curly-spacing": ["warn", "always"],
     "no-unused-vars": [
       "warn",
@@ -38,7 +39,7 @@
     "max-len": [
       "warn",
       {
-        "code": 100,
+        "code": 80,
         "ignoreStrings": true,
         "ignoreTemplateLiterals": true,
         "ignoreComments": true

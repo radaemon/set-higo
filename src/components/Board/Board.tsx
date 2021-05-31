@@ -4,12 +4,11 @@ import Card from '../Card/Card';
 
 type Props = {
   shownCards: {
-    color: number;
-    quantity: number;
-    shape: number;
-    texture: number;
+    color: 1 | 2 | 3;
+    quantity: 1 | 2 | 3;
+    shape: 1 | 2 | 3;
+    texture: 1 | 2 | 3;
   }[];
-  // selectedCards: object[];
 };
 
 const Board = ({ shownCards }: Props) => {
@@ -20,10 +19,20 @@ const Board = ({ shownCards }: Props) => {
       shape={card.shape}
       texture={card.texture}
       key={i}
-      isSelected={false}
     />
   ));
-  return <div>{cards}</div>;
+  return (
+    <div
+      className="board"
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'auto auto auto',
+        maxWidth: '30%',
+      }}
+    >
+      {cards}
+    </div>
+  );
 };
 
 export default Board;

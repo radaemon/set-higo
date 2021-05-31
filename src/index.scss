@@ -60,3 +60,10 @@ h5 {
   border-radius: 4px;
   cursor: pointer;
 }
+
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

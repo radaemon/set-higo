@@ -7,7 +7,10 @@ type Props = {
 
 export default function InformativeContainer({ color, children }: Props) {
   return (
-    <div className={`informative-container-${color}`}>
+    <div
+      style={{ backgroundColor: color }}
+      className={`informative-container-${color}`}
+    >
       <p>{children}</p>
     </div>
   );

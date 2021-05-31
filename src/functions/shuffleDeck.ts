@@ -1,8 +1,8 @@
 type DeckObject = {
-  color: number;
-  quantity: number;
-  shape: number;
-  texture: number;
+  color: 1 | 2 | 3;
+  quantity: 1 | 2 | 3;
+  shape: 1 | 2 | 3;
+  texture: 1 | 2 | 3;
 };
 
 function shuffleDeck(cardArr: DeckObject[]) {

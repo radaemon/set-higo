@@ -8,8 +8,8 @@ type Props = {
 export default function DiamondStriped({ color, quantity }: Props) {
   const figure = (
     <svg
-      width="75px"
-      height="180px"
+      width="18px"
+      height="45px"
       viewBox="0 0 75 180"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +18,13 @@ export default function DiamondStriped({ color, quantity }: Props) {
       <title>Diamond - Striped</title>
       <desc>Created with Sketch.</desc>
       <defs />
-      <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+      <g
+        id="Page-1"
+        stroke="none"
+        strokeWidth="1"
+        fill="none"
+        fillRule="evenodd"
+      >
         <g
           id="Diamond---Striped"
           transform="translate(37.500000, 90.000000) rotate(90.000000) translate(-37.500000, -90.000000) translate(-50.000000, 55.000000)"
@@ -34,5 +40,11 @@ export default function DiamondStriped({ color, quantity }: Props) {
       </g>
     </svg>
   );
-  return <>{Array(quantity).map(() => figure)}</>;
+  return (
+    <>
+      {Array(quantity)
+        .fill(0)
+        .map(() => figure)}
+    </>
+  );
 }

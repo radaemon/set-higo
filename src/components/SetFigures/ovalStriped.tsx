@@ -8,8 +8,8 @@ type Props = {
 export default function OvalStriped({ color, quantity }: Props) {
   const figure = (
     <svg
-      width="71px"
-      height="176px"
+      width="40px"
+      height="80px"
       viewBox="0 0 71 176"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +18,13 @@ export default function OvalStriped({ color, quantity }: Props) {
       <title>Oval - Striped</title>
       <desc>Created with Sketch.</desc>
       <defs />
-      <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+      <g
+        id="Page-1"
+        stroke="none"
+        strokeWidth="1"
+        fill="none"
+        fillRule="evenodd"
+      >
         <g
           id="Oval---Striped"
           transform="translate(35.500000, 88.000000) rotate(90.000000) translate(-35.500000, -88.000000) translate(-52.000000, 53.000000)"
@@ -37,5 +43,11 @@ export default function OvalStriped({ color, quantity }: Props) {
       </g>
     </svg>
   );
-  return <>{Array(quantity).map(() => figure)}</>;
+  return (
+    <>
+      {Array(quantity)
+        .fill(0)
+        .map(() => figure)}
+    </>
+  );
 }

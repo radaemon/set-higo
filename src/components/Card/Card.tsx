@@ -13,11 +13,10 @@ import SquiggleStriped from '../SetFigures/SquiggleStriped';
 import './styles.scss';
 
 type Props = {
-  color: number;
-  shape: number;
-  texture: number;
-  quantity: number;
-  isSelected: boolean;
+  color: 1 | 2 | 3;
+  shape: 1 | 2 | 3;
+  texture: 1 | 2 | 3;
+  quantity: 1 | 2 | 3;
 };
 
 const components = {
@@ -38,13 +37,24 @@ const colors = {
   3: 'purple',
 } as const;
 
-const Card = ({ color, shape, texture, quantity, isSelected }: Props) => {
+const Card = ({ color, shape, texture, quantity }: Props) => {
   const stringColor = colors[color];
   const ComponentToRender = components[`${shape}${texture}` as const];
 
   return (
-    <div className="card">
-      <ComponentToRender color={stringColor} quantity={quantity} />;
+    <div
+      className="card"
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderStyle: 'solid',
+        borderColor: 'gray',
+        width: '120px',
+        height: '100px',
+      }}
+    >
+      <ComponentToRender color={stringColor} quantity={quantity} />
     </div>
   );
 };
