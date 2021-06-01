@@ -6,13 +6,7 @@ import InformativeContainer from '../../components/InformativeContainer/Informat
 import shuffleDeck from '../../functions/shuffleDeck';
 import combinations from '../../functions/findAllSets';
 import isSet from '../../functions/isSet';
-
-type DeckObject = {
-  color: 1 | 2 | 3;
-  quantity: 1 | 2 | 3;
-  shape: 1 | 2 | 3;
-  texture: 1 | 2 | 3;
-};
+import type { DeckObject } from '../../functions/createDeck';
 
 function dealCards(
   deck: DeckObject[],
@@ -25,25 +19,32 @@ function dealCards(
 }
 
 const Play = () => {
+  const [timer, setTimer] = useState(0);
   const [deck, setDeck] = useState(shuffleDeck(createDeck()));
   const [shownCards, setShownCards] = useState<DeckObject[]>([]);
   const [setsAvailable, setSetsAvailable] = useState<number>(0);
 
   const allShownComb = combinations(shownCards);
 
-  let setCounter = 0;
+  let currSetCount = 0;
   allShownComb.forEach(([obj1, obj2, obj3]) => {
     if (isSet(obj1, obj2, obj3)) {
-      setCounter += 1;
+      currSetCount += 1;
     }
   });
 
   useEffect(() => {
-    setSetsAvailable(setCounter);
-  }, [shownCards, setCounter]);
+    setSetsAvailable(currSetCount);
+  }, [shownCards, currSetCount]);
 
   useEffect(() => {
     dealCards(deck, setDeck, setShownCards);
+    const timeSinceStart = window.setInterval(() => {
+      setTimer((prevTimer) => prevTimer + 1);
+    }, 1000);
+    return () => {
+      window.clearInterval(timeSinceStart);
+    };
   }, []);
 
   return (
@@ -56,6 +57,7 @@ const Play = () => {
       <Board shownCards={shownCards} />
       <p>Sets possible: {setsAvailable}</p>
       <p>Total cards left: {deck.length + shownCards.length}</p>
+      <p>{timer}</p>
     </div>
   );
 };

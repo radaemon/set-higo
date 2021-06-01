@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React from 'react';
+import React, { useState } from 'react';
 
 import DiamondOutlined from '../SetFigures/DiamondOutlined';
 import DiamondSolid from '../SetFigures/DiamondSolid';
@@ -13,13 +13,7 @@ import SquiggleSolid from '../SetFigures/SquiggleSolid';
 import SquiggleStriped from '../SetFigures/SquiggleStriped';
 
 import './styles.scss';
-
-type Props = {
-  color: 1 | 2 | 3;
-  shape: 1 | 2 | 3;
-  texture: 1 | 2 | 3;
-  quantity: 1 | 2 | 3;
-};
+import type { DeckObject } from '../../functions/createDeck';
 
 const components = {
   '11': OvalSolid,
@@ -34,17 +28,22 @@ const components = {
 } as const;
 
 const colors = {
-  1: '#f93b41',
-  2: '#46914A',
-  3: '#A033CD',
+  1: '#fa0000',
+  2: '#388b3b',
+  3: '#a128d0',
 } as const;
 
-const Card = ({ color, shape, texture, quantity }: Props) => {
+const Card = ({ color, shape, texture, quantity }: DeckObject) => {
   const stringColor = colors[color];
   const ComponentToRender = components[`${shape}${texture}` as const];
 
+  const [toggled, setToggled] = useState(false);
+
   return (
-    <div className="card" onClick={(e) => console.log(e)}>
+    <div
+      className={!toggled ? 'card' : 'card toggled'}
+      onClick={() => setToggled(!toggled)}
+    >
       <ComponentToRender color={stringColor} quantity={quantity} />
     </div>
   );

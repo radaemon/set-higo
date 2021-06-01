@@ -1,9 +1,4 @@
-type DeckObject = {
-  color: 1 | 2 | 3;
-  quantity: 1 | 2 | 3;
-  shape: 1 | 2 | 3;
-  texture: 1 | 2 | 3;
-};
+import type { DeckObject } from './createDeck';
 
 function areAllEqual([prop1, prop2, prop3]: (1 | 2 | 3)[]) {
   if (prop1 === prop2 && prop1 === prop3 && prop3 === prop2) {
