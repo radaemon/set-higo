@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React from 'react';
 
 import DiamondOutlined from '../SetFigures/DiamondOutlined';
 import DiamondSolid from '../SetFigures/DiamondSolid';
@@ -60,14 +60,11 @@ const Card = ({
   const stringColor = colors[color];
   const ComponentToRender = components[`${shape}${texture}` as const];
 
-  const [toggled, setToggled] = useState(false);
-
   return (
     <div
-      className={!toggled ? 'card' : 'card toggled'}
+      className={!cardBuffer.includes(index) ? 'card' : 'card toggled'}
       onClick={() => {
         toggleBuffer(index, cardBuffer, setCardBuffer);
-        setToggled(!toggled);
       }}
     >
       <ComponentToRender color={stringColor} quantity={quantity} />

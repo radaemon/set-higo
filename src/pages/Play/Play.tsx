@@ -4,8 +4,9 @@ import Board from '../../components/Board/Board';
 import createDeck from '../../functions/createDeck';
 import InformativeContainer from '../../components/InformativeContainer/InformativeContainer';
 import shuffleDeck from '../../functions/shuffleDeck';
-import combinations from '../../functions/findAllSets';
-import isSet from '../../functions/isSet';
+import { findBoardSets } from '../../functions/findAllSets';
+import { checkBufferSelectedCards } from '../../functions/isSet';
+
 import type { DeckObject } from '../../functions/createDeck';
 
 function dealCards(
@@ -18,64 +19,70 @@ function dealCards(
   deckSetter(theDeck);
 }
 
-// function checkSelectedCards(i1: number, i2: number, i3: number) {
-//   const card1 = shownCards[i1];
-//   const card2 = shownCards[i2];
-//   const card3 = shownCards[i3];
-
-//   let isASet = isSet(card1, card2, card3);
-
-//   if (!isASet) {
-//     // if its not a set send signal to reset class back to unselected
-//     return false;
-//   }
-
-//   // remove this 3 cards from shownCards array and deal more
-// }
-
 function toggleBuffer(
   i: number,
   buffer: number[],
   bufSetter: React.Dispatch<number[]>
 ) {
   if (buffer.includes(i)) {
+    const newBuffer = [...buffer];
     const indexToRemove = buffer.indexOf(i);
-    buffer.splice(indexToRemove, 1);
-    bufSetter(buffer);
+    newBuffer.splice(indexToRemove, 1);
+    bufSetter(newBuffer);
     return;
   }
   bufSetter([...buffer, i]);
 }
 
 const Play = () => {
-  const [timer, setTimer] = useState(0);
+  // let counter = 0;
   const [cardBuffer, setCardBuffer] = useState<number[]>([]);
   const [deck, setDeck] = useState(shuffleDeck(createDeck()));
   const [shownCards, setShownCards] = useState<DeckObject[]>([]);
   const [setsAvailable, setSetsAvailable] = useState<number>(0);
 
-  const allShownComb = combinations(shownCards);
-
-  let currSetCount = 0;
-  allShownComb.forEach(([obj1, obj2, obj3]) => {
-    if (isSet(obj1, obj2, obj3)) {
-      currSetCount += 1;
-    }
-  });
-
   useEffect(() => {
-    setSetsAvailable(currSetCount);
-  }, [shownCards, currSetCount]);
+    setSetsAvailable(findBoardSets(shownCards));
+  }, [shownCards]);
 
   useEffect(() => {
     dealCards(deck, setDeck, setShownCards);
-    const timeSinceStart = window.setInterval(() => {
-      setTimer((prevTimer) => prevTimer + 1);
-    }, 1000);
-    return () => {
-      window.clearInterval(timeSinceStart);
-    };
+    // const timeSinceStart = window.setInterval(() => {
+    //   counter += 1;
+    // }, 1000);
+    // return () => {
+    //   window.clearInterval(timeSinceStart);
+    // };
   }, []);
+
+  // if (cardBuffer.length > 2) {
+  //   const card1InBufferIdx = cardBuffer[0];
+  //   const card2InBufferIdx = cardBuffer[1];
+  //   const card3InBufferIdx = cardBuffer[2];
+  //   if (
+  //     checkBufferSelectedCards(
+  //       card1InBufferIdx,
+  //       card2InBufferIdx,
+  //       card3InBufferIdx,
+  //       shownCards
+  //     )
+  //   ) {
+  //     // remove from board those indices and replace with new cards from deck
+  //     const [...newBoardCards] = shownCards;
+  //     const [...newDeckToInsert] = deck;
+  //     // replace cards with new ones from deck.
+  //     newBoardCards[card1InBufferIdx] = newDeckToInsert.pop();
+  //     newBoardCards[card2InBufferIdx] = newDeckToInsert.pop();
+  //     newBoardCards[card3InBufferIdx] = newDeckToInsert.pop();
+  //     // set the board
+  //     setShownCards(newBoardCards);
+  //     setDeck(newDeckToInsert);
+  //     setCardBuffer([]);
+  //   }
+  //   setTimeout(() => {
+  //     setCardBuffer([]);
+  //   }, 500);
+  // }
 
   return (
     <div
@@ -92,7 +99,6 @@ const Play = () => {
       />
       <p>Sets possible: {setsAvailable}</p>
       <p>Total cards left: {deck.length + shownCards.length}</p>
-      <p>{timer}</p>
     </div>
   );
 };

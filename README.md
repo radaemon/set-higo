@@ -4,7 +4,7 @@ Engineers at Higo are expected to plan, execute, and deliver new features as wel
 
 ## Introduction
 
-In this repo you will find the base for an application that, with your help, will house a simple game called [_Set_](https://en.wikipedia.org/wiki/Set_(game)).
+In this repo you will find the base for an application that, with your help, will house a simple game called [_Set_](<https://en.wikipedia.org/wiki/Set_(game)>).
 
 The application has been set up using [`create-react-app`](https://github.com/facebook/create-react-app) and already contains a few views.
 
@@ -28,11 +28,25 @@ We expect you to implement the screens and functionality described below using t
 
 The codebase has the minimal dependencies required to run a React application, but we haven't decided on a few things.
 
-* Should we use `PropTypes` or some sort of static type checking like Flow or TypeScript?
-* Should we use a linter or formatter and if so what is the best configuration?
-* Should we invest in some form of style pre-processing? Are `classNames` and CSS variables (our current setup) enough?
-* How should we handle game state?
-* How can we test components and code in an isolated manner?
+- Should we use `PropTypes` or some sort of static type checking like Flow or TypeScript?
+
+[NOTE] As a personal choice and wanting to hone my skillset I went for Typescript which is what I would use in scalable applications even though for simple applications like this one can be quite taxing speedwise.
+
+- Should we use a linter or formatter and if so what is the best configuration?
+
+[NOTE] Adopted ESLint and Prettier formatter with Airbnb style guide configuration.
+
+- Should we invest in some form of style pre-processing? Are `classNames` and CSS variables (our current setup) enough?
+
+[NOTE] Implemented Sass which is really simple to use and basically acts as a superset of CSS without adding burden.
+
+- How should we handle game state?
+
+[NOTE] For more complex applications a state manager like Redux or Context API might be helpful to avoid excessive prop drilling but in this case I adopted a simple lightweight approach.
+
+- How can we test components and code in an isolated manner?
+
+[NOTE]
 
 Before you implement any functionality we expect you to review the code and think of answers and (if applicable) solutions to these issues as you implement your code.
 
@@ -65,9 +79,9 @@ Your task is to develop the game play components and functionality of our own ve
 2. Because no score is kept, there will not be any penalties for calling an incorrect set.
 
 3. If it is not possible to create a set with the cards laid out:
-    * The cards “on the table” will be returned to the deck
-    * The deck will be shuffled
-    * 12 new cards will be laid “on the table”.
+   - The cards “on the table” will be returned to the deck
+   - The deck will be shuffled
+   - 12 new cards will be laid “on the table”.
 
 ### Implementation
 

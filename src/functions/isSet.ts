@@ -35,3 +35,21 @@ export default function isSet(
 
   return false;
 }
+
+export function checkBufferSelectedCards(
+  i1: number,
+  i2: number,
+  i3: number,
+  shownCards: DeckObject[]
+) {
+  const card1 = shownCards[i1];
+  const card2 = shownCards[i2];
+  const card3 = shownCards[i3];
+
+  const isASet = isSet(card1, card2, card3);
+
+  if (!isASet) {
+    return false;
+  }
+  return true;
+}
