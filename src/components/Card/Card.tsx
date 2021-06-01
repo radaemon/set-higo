@@ -13,7 +13,21 @@ import SquiggleSolid from '../SetFigures/SquiggleSolid';
 import SquiggleStriped from '../SetFigures/SquiggleStriped';
 
 import './styles.scss';
-import type { DeckObject } from '../../functions/createDeck';
+
+type Props = {
+  color: 1 | 2 | 3;
+  quantity: 1 | 2 | 3;
+  shape: 1 | 2 | 3;
+  texture: 1 | 2 | 3;
+  index: number;
+  toggleBuffer: (
+    i: number,
+    buffer: number[],
+    bufSetter: React.Dispatch<number[]>
+  ) => void;
+  cardBuffer: number[];
+  setCardBuffer: React.Dispatch<React.SetStateAction<number[]>>;
+};
 
 const components = {
   '11': OvalSolid,
@@ -33,7 +47,16 @@ const colors = {
   3: '#a128d0',
 } as const;
 
-const Card = ({ color, shape, texture, quantity }: DeckObject) => {
+const Card = ({
+  color,
+  shape,
+  texture,
+  quantity,
+  index,
+  toggleBuffer,
+  cardBuffer,
+  setCardBuffer,
+}: Props) => {
   const stringColor = colors[color];
   const ComponentToRender = components[`${shape}${texture}` as const];
 
@@ -42,7 +65,10 @@ const Card = ({ color, shape, texture, quantity }: DeckObject) => {
   return (
     <div
       className={!toggled ? 'card' : 'card toggled'}
-      onClick={() => setToggled(!toggled)}
+      onClick={() => {
+        toggleBuffer(index, cardBuffer, setCardBuffer);
+        setToggled(!toggled);
+      }}
     >
       <ComponentToRender color={stringColor} quantity={quantity} />
     </div>
