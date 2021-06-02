@@ -34,21 +34,21 @@ function toggleBuffer(
   bufSetter([...buffer, i]);
 }
 
-function dealACard(
-  [...deck]: DeckObject[],
-  [...board]: DeckObject[],
-  indexOfBoard: number,
-  deckSetter: React.Dispatch<React.SetStateAction<DeckObject[]>>,
-  boardSetter: React.Dispatch<React.SetStateAction<DeckObject[]>>
-) {
-  if (!deck.length) {
-    return;
-  }
-  board[indexOfBoard] = deck.pop() as DeckObject;
+// function dealACard(
+//   [...deck]: DeckObject[],
+//   [...board]: DeckObject[],
+//   indexOfBoard: number,
+//   deckSetter: React.Dispatch<React.SetStateAction<DeckObject[]>>,
+//   boardSetter: React.Dispatch<React.SetStateAction<DeckObject[]>>
+// ) {
+//   if (!deck.length) {
+//     return;
+//   }
+//   board[indexOfBoard] = deck.pop() as DeckObject;
 
-  deckSetter(deck);
-  boardSetter(board);
-}
+//   deckSetter(deck);
+//   boardSetter(board);
+// }
 
 const Play = () => {
   // let counter = 0;
