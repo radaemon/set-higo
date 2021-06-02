@@ -5,7 +5,7 @@ import createDeck from '../../functions/createDeck';
 import InformativeContainer from '../../components/InformativeContainer/InformativeContainer';
 import shuffleDeck from '../../functions/shuffleDeck';
 import { findBoardSets } from '../../functions/findAllSets';
-import { checkBufferSelectedCards } from '../../functions/isSet';
+// import { checkBufferSelectedCards } from '../../functions/isSet';
 
 import type { DeckObject } from '../../functions/createDeck';
 
@@ -32,6 +32,22 @@ function toggleBuffer(
     return;
   }
   bufSetter([...buffer, i]);
+}
+
+function dealACard(
+  [...deck]: DeckObject[],
+  [...board]: DeckObject[],
+  indexOfBoard: number,
+  deckSetter: React.Dispatch<React.SetStateAction<DeckObject[]>>,
+  boardSetter: React.Dispatch<React.SetStateAction<DeckObject[]>>
+) {
+  if (!deck.length) {
+    return;
+  }
+  board[indexOfBoard] = deck.pop() as DeckObject;
+
+  deckSetter(deck);
+  boardSetter(board);
 }
 
 const Play = () => {
