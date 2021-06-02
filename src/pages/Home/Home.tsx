@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -10,13 +9,18 @@ const Home = () => (
     <div>
       <h1>Welcome!</h1>
       <p>Find all the sets.</p>
-      <p>A set is a group of 3 cards that satisfies all the following conditions:</p>
+      <p>
+        A set is a group of 3 cards that satisfies all the following conditions:
+      </p>
       <ul>
         <li>They all have the same symbol or have three different symbols.</li>
         <li>
-          They all have the same number of symbols or have three different numbers of symbols.
+          They all have the same number of symbols or have three different
+          numbers of symbols.
         </li>
-        <li>They all have the same shading or have three different shadings.</li>
+        <li>
+          They all have the same shading or have three different shadings.
+        </li>
         <li>They all have the same color or have three different colors.</li>
       </ul>
       <br />

@@ -1,10 +1,4 @@
-export type { DeckObject };
-type DeckObject = {
-  color: 1 | 2 | 3;
-  quantity: 1 | 2 | 3;
-  shape: 1 | 2 | 3;
-  texture: 1 | 2 | 3;
-};
+import type { DeckObject } from '../types/types';
 
 const createDeck = () => {
   const deck: DeckObject[] = [];

@@ -1,4 +1,4 @@
-import type { DeckObject } from './createDeck';
+import type { DeckObject, SetTuple } from '../types/types';
 
 function areAllEqual([prop1, prop2, prop3]: (1 | 2 | 3)[]) {
   if (prop1 === prop2 && prop1 === prop3 && prop3 === prop2) {
@@ -14,11 +14,7 @@ function areAllDifferent([prop1, prop2, prop3]: (1 | 2 | 3)[]) {
   return false;
 }
 
-export default function isSet(
-  object1: DeckObject,
-  object2: DeckObject,
-  object3: DeckObject
-) {
+export default function isSet([object1, object2, object3]: SetTuple) {
   const colors = [object1.color, object2.color, object3.color];
   const shapes = [object1.shape, object2.shape, object3.shape];
   const textures = [object1.texture, object2.texture, object3.texture];
