@@ -5,12 +5,12 @@ import InformativeContainer from '../../components/InformativeContainer/Informat
 import shuffleDeck from '../../functions/shuffleDeck';
 import { findBoardSets } from '../../functions/findAllSets';
 import { checkBufferSelectedCards } from '../../functions/isSet';
-import type { DeckObject } from '../../types/types';
+import type { CardObject } from '../../types/types';
 
 function dealCards(
-  deck: DeckObject[],
-  deckSetter: React.Dispatch<DeckObject[]>,
-  shownCardsSetter: React.Dispatch<DeckObject[]>
+  deck: CardObject[],
+  deckSetter: React.Dispatch<CardObject[]>,
+  shownCardsSetter: React.Dispatch<CardObject[]>
 ) {
   const [...theDeck] = deck;
   shownCardsSetter(theDeck.splice(0, 12));
@@ -33,16 +33,16 @@ function toggleBuffer(
 }
 
 function dealCard(
-  deck: DeckObject[],
-  board: DeckObject[],
+  deck: CardObject[],
+  board: CardObject[],
   indexOfBoard: number,
-  deckSetter: React.Dispatch<React.SetStateAction<DeckObject[]>>,
-  boardSetter: React.Dispatch<React.SetStateAction<DeckObject[]>>
+  deckSetter: React.Dispatch<React.SetStateAction<CardObject[]>>,
+  boardSetter: React.Dispatch<React.SetStateAction<CardObject[]>>
 ) {
   if (!deck.length) {
     return;
   }
-  board[indexOfBoard] = deck.pop() as DeckObject;
+  board[indexOfBoard] = deck.pop() as CardObject;
 
   deckSetter(deck);
   boardSetter(board);
@@ -51,7 +51,7 @@ function dealCard(
 const Play = () => {
   const [cardBuffer, setCardBuffer] = useState<number[]>([]);
   const [deck, setDeck] = useState(shuffleDeck(createDeck()));
-  const [shownCards, setShownCards] = useState<DeckObject[]>([]);
+  const [shownCards, setShownCards] = useState<CardObject[]>([]);
   const [setsAvailable, setSetsAvailable] = useState<number>(0);
 
   useEffect(() => {
@@ -62,30 +62,27 @@ const Play = () => {
     dealCards(deck, setDeck, setShownCards);
   }, []);
 
-  function isCurrBufferSet() {
-    if (cardBuffer.length > 2) {
-      const card1InBufferIdx = cardBuffer[0];
-      const card2InBufferIdx = cardBuffer[1];
-      const card3InBufferIdx = cardBuffer[2];
-      if (
-        checkBufferSelectedCards(
-          card1InBufferIdx,
-          card2InBufferIdx,
-          card3InBufferIdx,
-          shownCards
-        )
-      ) {
-        const [...newBoardCards] = shownCards;
-        const [...newDeckToInsert] = deck;
-        newBoardCards[card1InBufferIdx] = newDeckToInsert.pop();
-        newBoardCards[card2InBufferIdx] = newDeckToInsert.pop();
-        newBoardCards[card3InBufferIdx] = newDeckToInsert.pop();
-        setShownCards(newBoardCards);
-        setDeck(newDeckToInsert);
-        setCardBuffer([]);
-      }
-    }
-  }
+  // function isCurrBufferSet() {
+  //   if (cardBuffer.length >= 3) {
+  //     if (
+  //       checkBufferSelectedCards(
+  //         cardBuffer[0],
+  //         cardBuffer[1],
+  //         cardBuffer[2],
+  //         shownCards
+  //       )
+  //     ) {
+  //       const [...newBoardCards] = shownCards;
+  //       const [...newDeckToInsert] = deck;
+  //       newBoardCards[card1InBufferIdx] = newDeckToInsert.pop();
+  //       newBoardCards[card2InBufferIdx] = newDeckToInsert.pop();
+  //       newBoardCards[card3InBufferIdx] = newDeckToInsert.pop();
+  //       setShownCards(newBoardCards);
+  //       setDeck(newDeckToInsert);
+  //       setCardBuffer([]);
+  //     }
+  //   }
+  // }
 
   return (
     <div

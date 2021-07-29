@@ -1,7 +1,7 @@
-import type { DeckObject } from './createDeck';
+import type { CardObject, SetTuple } from '../types/types';
 import isSet from './isSet';
 
-export default function combinations(arr: DeckObject[], k = 3): DeckObject[][] {
+export default function combinations(arr: CardObject[], k = 3): SetTuple[] {
   const ret = [];
   let sub;
   let next;
@@ -17,16 +17,16 @@ export default function combinations(arr: DeckObject[], k = 3): DeckObject[][] {
       }
     }
   }
-  return ret;
+  return ret as SetTuple[];
 }
 
-export function findBoardSets(boardShownCards: DeckObject[]) {
+export function findBoardSets(boardShownCards: CardObject[]) {
   const allCombinationsOfBoard = combinations(boardShownCards);
 
   let setsInBoard = 0;
 
-  allCombinationsOfBoard.forEach(([obj1, obj2, obj3]) => {
-    if (isSet(obj1, obj2, obj3)) {
+  allCombinationsOfBoard.forEach((set) => {
+    if (isSet(set)) {
       setsInBoard += 1;
     }
   });

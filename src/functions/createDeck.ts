@@ -1,7 +1,7 @@
-import type { DeckObject } from '../types/types';
+import type { CardObject } from '../types/types';
 
 const createDeck = () => {
-  const deck: DeckObject[] = [];
+  const deck: CardObject[] = [];
 
   for (let i = 1; i <= 3; i++) {
     for (let j = 1; j <= 3; j++) {

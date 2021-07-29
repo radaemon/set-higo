@@ -1,12 +1,12 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import Card from '../Card/Card';
-import type { DeckObject } from '../../functions/createDeck';
+import { SetTuple, CardObject } from '../../types/types';
 
 import './styles.scss';
 
 type Props = {
-  shownCards: DeckObject[];
+  shownCards: CardObject[];
   toggleBuffer: (
     i: number,
     buffer: number[],
@@ -35,7 +35,11 @@ const Board = ({
       key={i}
     />
   ));
-  return <div className="board">{cards}</div>;
+  return (
+    <div className="board" role="main">
+      {cards}
+    </div>
+  );
 };
 
 export default Board;
