@@ -6,31 +6,15 @@ import { CardObject } from '../../types/types';
 import './styles.scss';
 
 type Props = {
-  shownCards: CardObject[];
-  toggleBuffer: (
-    i: number,
-    buffer: number[],
-    bufSetter: React.Dispatch<number[]>
-  ) => void;
-  cardBuffer: number[];
-  setCardBuffer: React.Dispatch<React.SetStateAction<number[]>>;
+  boardCards: CardObject[];
+  toggleBuffer: (i: number) => void;
 };
 
-const Board = ({
-  shownCards,
-  toggleBuffer,
-  cardBuffer,
-  setCardBuffer,
-}: Props) => {
-  const cards = shownCards.map((card, i) => (
+const Board = ({ boardCards, toggleBuffer }: Props) => {
+  const cards = boardCards.map((card, i) => (
     <Card
-      color={card.color}
-      quantity={card.quantity}
-      shape={card.shape}
-      texture={card.texture}
+      card={card}
       index={i}
-      cardBuffer={cardBuffer}
-      setCardBuffer={setCardBuffer}
       toggleBuffer={toggleBuffer}
       key={`${card.color}-${card.quantity}-${card.shape}-${card.texture}`}
     />

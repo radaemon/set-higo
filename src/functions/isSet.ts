@@ -1,4 +1,4 @@
-import type { CardObject, SetTuple } from '../types/types';
+import type { SetTuple } from '../types/types';
 
 function areAllEqual([prop1, prop2, prop3]: (1 | 2 | 3)[]) {
   if (prop1 === prop2 && prop1 === prop3 && prop3 === prop2) {
@@ -30,22 +30,4 @@ export default function isSet([object1, object2, object3]: SetTuple) {
   }
 
   return false;
-}
-
-export function checkBufferSelectedCards(
-  i1: number,
-  i2: number,
-  i3: number,
-  shownCards: CardObject[]
-) {
-  const card1 = shownCards[i1];
-  const card2 = shownCards[i2];
-  const card3 = shownCards[i3];
-
-  const isASet = isSet([card1, card2, card3]);
-
-  if (!isASet) {
-    return false;
-  }
-  return true;
 }

@@ -1,7 +1,7 @@
 import type { CardObject, SetTuple } from '../types/types';
 import isSet from './isSet';
 
-export default function combinations(arr: CardObject[], k = 3): SetTuple[] {
+export function combinations(arr: CardObject[], k = 3): SetTuple[] {
   const ret = [];
   let sub;
   let next;
@@ -20,7 +20,7 @@ export default function combinations(arr: CardObject[], k = 3): SetTuple[] {
   return ret as SetTuple[];
 }
 
-export function findBoardSets(boardShownCards: CardObject[]) {
+export function numSetsInBoard(boardShownCards: CardObject[]) {
   const allCombinationsOfBoard = combinations(boardShownCards);
 
   let setsInBoard = 0;
@@ -32,4 +32,21 @@ export function findBoardSets(boardShownCards: CardObject[]) {
   });
 
   return setsInBoard;
+}
+
+export function findSetIndices(board: CardObject[]) {
+  const allCombinationsInBoard = combinations(board);
+  let indicesOfFirstSet;
+  for (const setTuples of allCombinationsInBoard) {
+    if (isSet(setTuples)) {
+      const [card1, card2, card3] = setTuples;
+      indicesOfFirstSet = [
+        board.indexOf(card1),
+        board.indexOf(card2),
+        board.indexOf(card3),
+      ];
+      break;
+    }
+  }
+  return indicesOfFirstSet;
 }

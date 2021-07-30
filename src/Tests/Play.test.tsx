@@ -10,6 +10,7 @@ describe('Play component', () => {
     render(<Play />, { wrapper: MemoryRouter });
     const cards = screen.getAllByLabelText(/card/i);
     expect(cards.length).toBe(12);
+    screen.debug();
   });
   test('When user clicks a card aria and className switch accordingly.', () => {
     render(<Play />, { wrapper: MemoryRouter });
@@ -23,4 +24,5 @@ describe('Play component', () => {
     expect(card[0]).toHaveAttribute('aria-pressed', 'false');
     expect(card[0]).toHaveAttribute('class', 'card');
   });
+  test('New cards are dealt replacing SetTuple buffer.', () => {});
 });

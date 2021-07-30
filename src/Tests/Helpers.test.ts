@@ -1,5 +1,5 @@
 import createDeck from '../functions/createDeck';
-import combinations from '../functions/findAllSets';
+import { combinations } from '../functions/findAllSets';
 import isSet from '../functions/isSet';
 import {
   realSet as realMockSet,
