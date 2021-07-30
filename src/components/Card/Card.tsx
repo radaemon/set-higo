@@ -1,6 +1,4 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import React from 'react';
+import React, { useState } from 'react';
 import { components, colors } from '../../types/types';
 
 import './styles.scss';
@@ -30,16 +28,24 @@ const Card = ({
   cardBuffer,
   setCardBuffer,
 }: Props) => {
+  const [ariaPressed, setAriaPressed] = useState(false);
   const stringColor = colors[color];
   const ComponentToRender = components[`${shape}${texture}` as const];
+
+  const chooseCard = () => {
+    toggleBuffer(index, cardBuffer, setCardBuffer);
+    setAriaPressed(!ariaPressed);
+  };
 
   return (
     <div
       className={!cardBuffer.includes(index) ? 'card' : 'card toggled'}
       aria-label={`card-${color}-${quantity}-${shape}-${texture}`}
-      onClick={() => {
-        toggleBuffer(index, cardBuffer, setCardBuffer);
-      }}
+      role="button"
+      aria-pressed={ariaPressed}
+      tabIndex={0}
+      onClick={chooseCard}
+      onKeyPress={chooseCard}
     >
       <ComponentToRender color={stringColor} quantity={quantity} />
     </div>

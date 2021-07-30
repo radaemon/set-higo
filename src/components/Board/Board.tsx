@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import Card from '../Card/Card';
-import { SetTuple, CardObject } from '../../types/types';
+import { CardObject } from '../../types/types';
 
 import './styles.scss';
 
@@ -32,7 +32,7 @@ const Board = ({
       cardBuffer={cardBuffer}
       setCardBuffer={setCardBuffer}
       toggleBuffer={toggleBuffer}
-      key={i}
+      key={`${card.color}-${card.quantity}-${card.shape}-${card.texture}`}
     />
   ));
   return (

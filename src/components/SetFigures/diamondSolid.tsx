@@ -6,8 +6,9 @@ type Props = {
 };
 
 export default function DiamondSolid({ color, quantity }: Props) {
-  const figure = (
+  const figure = (idx: number) => (
     <svg
+      key={idx}
       width="23px"
       height="50px"
       viewBox="0 0 75 180"
@@ -39,7 +40,7 @@ export default function DiamondSolid({ color, quantity }: Props) {
     <>
       {Array(quantity)
         .fill(0)
-        .map(() => figure)}
+        .map((_, i) => figure(i))}
     </>
   );
 }

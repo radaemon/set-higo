@@ -1,10 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import Board from '../../components/Board/Board';
 import createDeck from '../../functions/createDeck';
 import InformativeContainer from '../../components/InformativeContainer/InformativeContainer';
 import shuffleDeck from '../../functions/shuffleDeck';
 import { findBoardSets } from '../../functions/findAllSets';
-import { checkBufferSelectedCards } from '../../functions/isSet';
 import type { CardObject } from '../../types/types';
 
 function dealCards(
@@ -32,21 +32,21 @@ function toggleBuffer(
   bufSetter([...buffer, i]);
 }
 
-function dealCard(
-  deck: CardObject[],
-  board: CardObject[],
-  indexOfBoard: number,
-  deckSetter: React.Dispatch<React.SetStateAction<CardObject[]>>,
-  boardSetter: React.Dispatch<React.SetStateAction<CardObject[]>>
-) {
-  if (!deck.length) {
-    return;
-  }
-  board[indexOfBoard] = deck.pop() as CardObject;
+// function dealCard(
+//   deck: CardObject[],
+//   board: CardObject[],
+//   indexOfBoard: number,
+//   deckSetter: React.Dispatch<React.SetStateAction<CardObject[]>>,
+//   boardSetter: React.Dispatch<React.SetStateAction<CardObject[]>>
+// ) {
+//   if (!deck.length) {
+//     return;
+//   }
+//   board[indexOfBoard] = deck.pop() as CardObject;
 
-  deckSetter(deck);
-  boardSetter(board);
-}
+//   deckSetter(deck);
+//   boardSetter(board);
+// }
 
 const Play = () => {
   const [cardBuffer, setCardBuffer] = useState<number[]>([]);

@@ -6,8 +6,9 @@ type Props = {
 };
 
 export default function OvalStriped({ color, quantity }: Props) {
-  const figure = (
+  const figure = (idx: number) => (
     <svg
+      key={idx}
       width="25px"
       height="50px"
       viewBox="0 0 71 176"
@@ -47,7 +48,7 @@ export default function OvalStriped({ color, quantity }: Props) {
     <>
       {Array(quantity)
         .fill(0)
-        .map(() => figure)}
+        .map((_, i) => figure(i))}
     </>
   );
 }
