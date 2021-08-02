@@ -6,6 +6,7 @@ import InformativeContainer from '../../components/InformativeContainer/Informat
 import shuffleDeck from '../../functions/shuffleDeck';
 import { numSetsInBoard } from '../../functions/findAllSets';
 import type { CardObject } from '../../types/types';
+import isSet from '../../functions/isSet';
 
 const Play = () => {
   const [cardBuffer, setCardBuffer] = useState<number[]>([]);
@@ -27,13 +28,33 @@ const Play = () => {
     setDeck(theDeck);
   }
 
+  // function dealSet(cardsToRemove: [number, number, number]) {
+  //   const [...theDeck] = deck;
+  //   const [...theBoard] = boardCards;
+
+  //   const [i1, i2, i3] = cardsToRemove;
+  //   theBoard[i1] = theDeck.pop();
+  //   theBoard[i2] = theDeck.pop();
+  //   theBoard[i3] = theDeck.pop();
+
+  //   setBoardCards(theBoard)
+  //   setDeck(theDeck)
+  //   setCardBuffer([])
+  // }
+
   function toggleBuffer(i: number) {
     if (cardBuffer.includes(i)) {
       const newBuffer = [...cardBuffer];
-      const indexToRemove = cardBuffer.indexOf(i);
-      newBuffer.splice(indexToRemove, 1);
+      newBuffer.splice(cardBuffer.indexOf(i), 1);
       setCardBuffer(newBuffer);
       return;
+    }
+    if (cardBuffer.length >= 3) {
+      isSet([
+        boardCards[cardBuffer[0]],
+        boardCards[cardBuffer[1]],
+        boardCards[cardBuffer[2]],
+      ]);
     }
     setCardBuffer([...cardBuffer, i]);
   }

@@ -22,7 +22,7 @@ const Card = ({ card, index, toggleBuffer }: Props) => {
   return (
     <div
       className={!cardSelected ? 'card' : 'card toggled'}
-      aria-label={`card-${card.color}-${card.quantity}-${card.shape}-${card.texture}`}
+      aria-label={`${card.color}${card.quantity}${card.shape}${card.texture} color-quantity-shape-texture`}
       role="button"
       aria-pressed={cardSelected}
       tabIndex={0}
