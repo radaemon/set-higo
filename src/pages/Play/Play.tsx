@@ -5,7 +5,7 @@ import createDeck from '../../functions/createDeck';
 import InformativeContainer from '../../components/InformativeContainer/InformativeContainer';
 import shuffleDeck from '../../functions/shuffleDeck';
 import { numSetsInBoard } from '../../functions/findAllSets';
-import type { CardObject } from '../../types/types';
+import type { CardObject, StatusDisplay } from '../../types/types';
 import isSet from '../../functions/isSet';
 
 const Play = () => {
@@ -13,6 +13,10 @@ const Play = () => {
   const [deck, setDeck] = useState(shuffleDeck(createDeck()));
   const [boardCards, setBoardCards] = useState<CardObject[]>([]);
   const [setsAvailable, setSetsAvailable] = useState<number>(0);
+  const [statusDisplay, setStatusDisplay] = useState<StatusDisplay>({
+    color: '',
+    text: 'Incorrect set',
+  });
 
   useEffect(() => {
     setSetsAvailable(numSetsInBoard(boardCards));
@@ -63,21 +67,37 @@ const Play = () => {
     if (newBuffer.length > 2) {
       const [i1, i2, i3] = newBuffer;
       if (isSet([boardCards[i1], boardCards[i2], boardCards[i3]])) {
+        displaySet();
         dealSet([i1, i2, i3]);
         return;
       }
       setCardBuffer([]);
+      displayNotSet();
       return;
     }
     setCardBuffer(newBuffer);
+  }
+
+  function displayNotSet() {
+    setStatusDisplay({ color: 'red', text: 'Incorrect set' });
+    setTimeout(() => {
+      setStatusDisplay({ color: '', text: 'Incorrect set' });
+    }, 3000);
+  }
+
+  function displaySet() {
+    setStatusDisplay({ color: 'blue', text: 'Set found' });
+    setTimeout(() => {
+      setStatusDisplay({ color: '', text: 'Incorrect set' });
+    }, 3000);
   }
 
   return (
     <div
       style={{ display: 'flex', flexDirection: 'column', marginTop: '100px' }}
     >
-      <InformativeContainer color="blue">
-        Informative Content Here
+      <InformativeContainer color={statusDisplay.color}>
+        {statusDisplay.text}
       </InformativeContainer>
       <Board
         cardBuffer={cardBuffer}

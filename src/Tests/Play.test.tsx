@@ -41,15 +41,14 @@ describe('Play component', () => {
       } as CardObject;
     });
     const firstFoundSet = findSetIndices(cardObjects);
+    let lastAriaLabel;
     if (firstFoundSet) {
-      const lastAriaLabel =
-        domCards[firstFoundSet[0]].getAttribute('aria-label');
+      lastAriaLabel = domCards[firstFoundSet[0]].getAttribute('aria-label');
       fireEvent.click(domCards[firstFoundSet[0]]);
       fireEvent.click(domCards[firstFoundSet[1]]);
       fireEvent.click(domCards[firstFoundSet[2]]);
-      expect(
-        lastAriaLabel === domCards[firstFoundSet[0]].getAttribute('aria-label')
-      ).toBeFalsy();
     }
+    lastAriaLabel &&
+      expect(screen.queryByLabelText(lastAriaLabel)).not.toBeInTheDocument();
   });
 });

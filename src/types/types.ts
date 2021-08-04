@@ -18,6 +18,11 @@ type CardObject = {
 
 type SetTuple = [CardObject, CardObject, CardObject];
 
+type StatusDisplay = {
+  color: 'red' | 'blue' | '';
+  text: 'Set found' | 'Incorrect set';
+};
+
 const components = {
   '11': OvalSolid,
   '12': OvalOutlined,
@@ -36,5 +41,5 @@ const colors = {
   3: '#a128d0',
 } as const;
 
-export type { SetTuple, CardObject };
+export type { SetTuple, CardObject, StatusDisplay };
 export { components, colors };
