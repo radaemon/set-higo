@@ -8,11 +8,13 @@ import './styles.scss';
 type Props = {
   boardCards: CardObject[];
   toggleBuffer: (i: number) => void;
+  cardBuffer: number[];
 };
 
-const Board = ({ boardCards, toggleBuffer }: Props) => {
+const Board = ({ cardBuffer, boardCards, toggleBuffer }: Props) => {
   const cards = boardCards.map((card, i) => (
     <Card
+      cardBuffer={cardBuffer}
       card={card}
       index={i}
       toggleBuffer={toggleBuffer}

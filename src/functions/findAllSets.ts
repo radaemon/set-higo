@@ -21,7 +21,9 @@ export function combinations(arr: CardObject[], k = 3): SetTuple[] {
 }
 
 export function numSetsInBoard(boardShownCards: CardObject[]) {
-  const allCombinationsOfBoard = combinations(boardShownCards);
+  const allCombinationsOfBoard = combinations(
+    boardShownCards.filter((card) => card.visibility === true)
+  );
 
   let setsInBoard = 0;
 

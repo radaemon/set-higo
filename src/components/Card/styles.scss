@@ -12,9 +12,7 @@
   &.toggled {
     background-color: rgba(186, 231, 237, 0.5);
   }
-}
-
-.nocard {
-  width: 100px;
-  height: 60px;
+  &.hidden {
+    visibility: hidden;
+  }
 }

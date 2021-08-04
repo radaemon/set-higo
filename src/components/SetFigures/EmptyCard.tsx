@@ -1,10 +1,5 @@
 import React from 'react';
 
-type Props = {
-  color: string;
-  quantity: number;
-};
-
-export default function EmptyCard({ color, quantity }: Props) {
+export default function EmptyCard() {
   return <div></div>;
 }

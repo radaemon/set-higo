@@ -28,35 +28,48 @@ const Play = () => {
     setDeck(theDeck);
   }
 
-  // function dealSet(cardsToRemove: [number, number, number]) {
-  //   const [...theDeck] = deck;
-  //   const [...theBoard] = boardCards;
+  function dealSet(bufferIndices: [number, number, number]) {
+    const [...theDeck] = deck;
+    const [...theBoard] = boardCards;
 
-  //   const [i1, i2, i3] = cardsToRemove;
-  //   theBoard[i1] = theDeck.pop();
-  //   theBoard[i2] = theDeck.pop();
-  //   theBoard[i3] = theDeck.pop();
+    const [i1, i2, i3] = bufferIndices;
 
-  //   setBoardCards(theBoard)
-  //   setDeck(theDeck)
-  //   setCardBuffer([])
-  // }
+    if (theDeck.length >= 3) {
+      theBoard[i1] = theDeck.pop() as CardObject;
+      theBoard[i2] = theDeck.pop() as CardObject;
+      theBoard[i3] = theDeck.pop() as CardObject;
+    } else {
+      theBoard[i1] = { ...theBoard[i1], visibility: false };
+      theBoard[i2] = { ...theBoard[i2], visibility: false };
+      theBoard[i3] = { ...theBoard[i3], visibility: false };
+    }
+    setBoardCards(theBoard);
+    setDeck(theDeck);
+    setCardBuffer([]);
+  }
+
+  function removeAlreadySelectedIndex(i: number) {
+    const newBuffer = [...cardBuffer];
+    newBuffer.splice(cardBuffer.indexOf(i), 1);
+    setCardBuffer(newBuffer);
+  }
 
   function toggleBuffer(i: number) {
     if (cardBuffer.includes(i)) {
-      const newBuffer = [...cardBuffer];
-      newBuffer.splice(cardBuffer.indexOf(i), 1);
-      setCardBuffer(newBuffer);
+      removeAlreadySelectedIndex(i);
       return;
     }
-    if (cardBuffer.length >= 3) {
-      isSet([
-        boardCards[cardBuffer[0]],
-        boardCards[cardBuffer[1]],
-        boardCards[cardBuffer[2]],
-      ]);
+    const newBuffer = [...cardBuffer, i];
+    if (newBuffer.length > 2) {
+      const [i1, i2, i3] = newBuffer;
+      if (isSet([boardCards[i1], boardCards[i2], boardCards[i3]])) {
+        dealSet([i1, i2, i3]);
+        return;
+      }
+      setCardBuffer([]);
+      return;
     }
-    setCardBuffer([...cardBuffer, i]);
+    setCardBuffer(newBuffer);
   }
 
   return (
@@ -66,7 +79,11 @@ const Play = () => {
       <InformativeContainer color="blue">
         Informative Content Here
       </InformativeContainer>
-      <Board boardCards={boardCards} toggleBuffer={toggleBuffer} />
+      <Board
+        cardBuffer={cardBuffer}
+        boardCards={boardCards}
+        toggleBuffer={toggleBuffer}
+      />
       <p>Sets possible: {setsAvailable}</p>
       <p>Total cards left: {deck.length + boardCards.length}</p>
     </div>

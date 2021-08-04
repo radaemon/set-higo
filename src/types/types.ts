@@ -13,6 +13,7 @@ type CardObject = {
   quantity: 1 | 2 | 3;
   shape: 1 | 2 | 3;
   texture: 1 | 2 | 3;
+  visibility: boolean;
 };
 
 type SetTuple = [CardObject, CardObject, CardObject];

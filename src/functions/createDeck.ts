@@ -18,6 +18,7 @@ const createDeck = () => {
               color: j,
               shape: k,
               texture: m,
+              visibility: true,
             });
           }
         }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { components, colors, CardObject } from '../../types/types';
 
 import './styles.scss';
@@ -6,30 +6,36 @@ import './styles.scss';
 type Props = {
   card: CardObject;
   index: number;
+  cardBuffer: number[];
   toggleBuffer: (i: number) => void;
 };
 
-const Card = ({ card, index, toggleBuffer }: Props) => {
-  const [cardSelected, setCardSelected] = useState(false);
-  const stringColor = colors[card.color];
+const Card = ({ card, index, cardBuffer, toggleBuffer }: Props) => {
+  const cardColor = colors[card.color];
   const ComponentToRender = components[`${card.shape}${card.texture}` as const];
 
   const chooseCard = () => {
+    if (!card.visibility) return;
     toggleBuffer(index);
-    setCardSelected(!cardSelected);
   };
+
+  function getClassName() {
+    if (!card.visibility) return 'card hidden';
+    if (cardBuffer.includes(index)) return 'card toggled';
+    return 'card';
+  }
 
   return (
     <div
-      className={!cardSelected ? 'card' : 'card toggled'}
+      className={getClassName()}
       aria-label={`${card.color}${card.quantity}${card.shape}${card.texture} color-quantity-shape-texture`}
       role="button"
-      aria-pressed={cardSelected}
+      aria-pressed={cardBuffer.includes(index)}
       tabIndex={0}
       onClick={chooseCard}
       onKeyPress={chooseCard}
     >
-      <ComponentToRender color={stringColor} quantity={card.quantity} />
+      <ComponentToRender color={cardColor} quantity={card.quantity} />
     </div>
   );
 };
