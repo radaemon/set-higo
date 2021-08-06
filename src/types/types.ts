@@ -23,6 +23,12 @@ type StatusDisplay = {
   text: 'Set found' | 'Incorrect set';
 };
 
+type ModalState = {
+  noSetsDeck: boolean;
+  noSetsBoard: boolean;
+  seconds: number;
+};
+
 const components = {
   '11': OvalSolid,
   '12': OvalOutlined,
@@ -41,5 +47,5 @@ const colors = {
   3: '#a128d0',
 } as const;
 
-export type { SetTuple, CardObject, StatusDisplay };
+export type { SetTuple, CardObject, StatusDisplay, ModalState };
 export { components, colors };

@@ -3,33 +3,65 @@ import React, { useEffect, useState } from 'react';
 import Board from '../../components/Board/Board';
 import createDeck from '../../functions/createDeck';
 import InformativeContainer from '../../components/InformativeContainer/InformativeContainer';
-import shuffleDeck from '../../functions/shuffleDeck';
-import { numSetsInBoard } from '../../functions/findAllSets';
-import type { CardObject, StatusDisplay } from '../../types/types';
+import Modal from '../../components/Modal/Modal';
+import TimerHook from '../../components/Hooks/TimerHook';
+import { numSetsInCardObjArr } from '../../functions/findAllSets';
+import type { CardObject, ModalState, StatusDisplay } from '../../types/types';
 import isSet from '../../functions/isSet';
 
 const Play = () => {
+  const timer = TimerHook();
   const [cardBuffer, setCardBuffer] = useState<number[]>([]);
-  const [deck, setDeck] = useState(shuffleDeck(createDeck()));
+  const [deck, setDeck] = useState(createDeck());
   const [boardCards, setBoardCards] = useState<CardObject[]>([]);
-  const [setsAvailable, setSetsAvailable] = useState<number>(0);
+  const [numBoardSets, setNumBoardSets] = useState<number>(0);
   const [statusDisplay, setStatusDisplay] = useState<StatusDisplay>({
     color: '',
     text: 'Incorrect set',
   });
+  const [stateModal, setStateModal] = useState<ModalState>({
+    noSetsBoard: false,
+    noSetsDeck: false,
+    seconds: 0,
+  });
 
   useEffect(() => {
-    setSetsAvailable(numSetsInBoard(boardCards));
+    setNumBoardSets(numSetsInCardObjArr(boardCards));
+    checkNoBoardSetsModal();
+    checkNoDeckSetsModal();
   }, [boardCards]);
 
   useEffect(() => {
-    dealNewGame();
+    dealGame();
   }, []);
 
-  function dealNewGame() {
-    const [...theDeck] = deck;
-    setBoardCards(theDeck.splice(0, 12));
-    setDeck(theDeck);
+  function dealGame() {
+    const [...copyDeck] = shuffleDeck();
+    setBoardCards(copyDeck.splice(0, 12));
+    setDeck(copyDeck);
+  }
+
+  function checkNoBoardSetsModal() {
+    if (numBoardSets) setStateModal({ ...stateModal, noSetsBoard: false });
+    else if (!numBoardSets) setStateModal({ ...stateModal, noSetsBoard: true });
+  }
+
+  function checkNoDeckSetsModal() {
+    const setsInDeck = numSetsInCardObjArr([...boardCards, ...deck]);
+    if (setsInDeck) setStateModal({ ...stateModal, noSetsBoard: false });
+    else if (!setsInDeck)
+      setStateModal({ ...stateModal, noSetsBoard: true, seconds: timer });
+  }
+
+  function shuffleDeck() {
+    const [...arr] = [...deck, ...boardCards];
+    for (let i = deck.length - 1; i > 0; i--) {
+      const randomInteger = Math.floor(Math.random() * deck.length);
+      const temp = arr[i];
+      arr[i] = arr[randomInteger];
+      arr[randomInteger] = temp;
+    }
+    return arr;
   }
 
   function dealSet(bufferIndices: [number, number, number]) {
@@ -64,38 +96,48 @@ const Play = () => {
       return;
     }
     const newBuffer = [...cardBuffer, i];
+    setCardBuffer(newBuffer);
     if (newBuffer.length > 2) {
       const [i1, i2, i3] = newBuffer;
       if (isSet([boardCards[i1], boardCards[i2], boardCards[i3]])) {
-        displaySet();
-        dealSet([i1, i2, i3]);
+        alertSetSuccess().then(() => {
+          dealSet([i1, i2, i3]);
+        });
         return;
       }
-      setCardBuffer([]);
-      displayNotSet();
+      alertSetFailed().then(() => {
+        setCardBuffer([]);
+      });
       return;
     }
     setCardBuffer(newBuffer);
   }
 
-  function displayNotSet() {
+  function alertSetFailed() {
     setStatusDisplay({ color: 'red', text: 'Incorrect set' });
-    setTimeout(() => {
-      setStatusDisplay({ color: '', text: 'Incorrect set' });
-    }, 3000);
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        setStatusDisplay({ ...statusDisplay, color: '' });
+        resolve('Promise resolved');
+      }, 3000);
+    });
   }
 
-  function displaySet() {
+  function alertSetSuccess() {
     setStatusDisplay({ color: 'blue', text: 'Set found' });
-    setTimeout(() => {
-      setStatusDisplay({ color: '', text: 'Incorrect set' });
-    }, 3000);
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        setStatusDisplay({ ...statusDisplay, color: '' });
+        resolve('Promise resolved');
+      }, 3000);
+    });
   }
 
   return (
     <div
       style={{ display: 'flex', flexDirection: 'column', marginTop: '100px' }}
     >
+      <Modal modalState={stateModal} />
       <InformativeContainer color={statusDisplay.color}>
         {statusDisplay.text}
       </InformativeContainer>
@@ -104,7 +146,7 @@ const Play = () => {
         boardCards={boardCards}
         toggleBuffer={toggleBuffer}
       />
-      <p>Sets possible: {setsAvailable}</p>
+      <p>Sets possible: {numBoardSets}</p>
       <p>Total cards left: {deck.length + boardCards.length}</p>
     </div>
   );

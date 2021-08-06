@@ -20,9 +20,9 @@ export function combinations(arr: CardObject[], k = 3): SetTuple[] {
   return ret as SetTuple[];
 }
 
-export function numSetsInBoard(boardShownCards: CardObject[]) {
+export function numSetsInCardObjArr(cardObjArr: CardObject[]) {
   const allCombinationsOfBoard = combinations(
-    boardShownCards.filter((card) => card.visibility === true)
+    cardObjArr.filter((card) => card.visibility === true)
   );
 
   let setsInBoard = 0;
@@ -36,7 +36,7 @@ export function numSetsInBoard(boardShownCards: CardObject[]) {
   return setsInBoard;
 }
 
-export function findSetIndices(board: CardObject[]) {
+export function findFirstSetIndices(board: CardObject[]) {
   const allCombinationsInBoard = combinations(board);
   let indicesOfFirstSet;
   for (const setTuples of allCombinationsInBoard) {

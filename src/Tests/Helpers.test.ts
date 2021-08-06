@@ -18,5 +18,4 @@ describe('Helper Functions', () => {
   test('Verifies all combinations of deck amount to 85,320 (81 Choose 3)', () => {
     expect(combinations(createDeck()).length).toEqual(85320);
   });
-  test('Check that cards are dealt properly (new game, new set, last card)', () => {});
 });
