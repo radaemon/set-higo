@@ -18,6 +18,7 @@ const Play = () => {
   const [statusDisplay, setStatusDisplay] = useState<StatusDisplay>({
     color: '',
     text: 'Incorrect set',
+    thinking: false,
   });
   const [stateModal, setStateModal] = useState<ModalState>({
     noSetsBoard: false,
@@ -91,6 +92,7 @@ const Play = () => {
   }
 
   function toggleBuffer(i: number) {
+    if (statusDisplay.thinking) return;
     if (cardBuffer.includes(i)) {
       removeAlreadySelectedIndex(i);
       return;
@@ -114,20 +116,20 @@ const Play = () => {
   }
 
   function alertSetFailed() {
-    setStatusDisplay({ color: 'red', text: 'Incorrect set' });
+    setStatusDisplay({ color: 'red', text: 'Incorrect set', thinking: true });
     return new Promise((resolve) => {
       setTimeout(() => {
-        setStatusDisplay({ ...statusDisplay, color: '' });
+        setStatusDisplay({ ...statusDisplay, color: '', thinking: false });
         resolve('Promise resolved');
       }, 3000);
     });
   }
 
   function alertSetSuccess() {
-    setStatusDisplay({ color: 'blue', text: 'Set found' });
+    setStatusDisplay({ color: 'blue', text: 'Set found', thinking: true });
     return new Promise((resolve) => {
       setTimeout(() => {
-        setStatusDisplay({ ...statusDisplay, color: '' });
+        setStatusDisplay({ ...statusDisplay, color: '', thinking: false });
         resolve('Promise resolved');
       }, 3000);
     });

@@ -21,6 +21,7 @@ type SetTuple = [CardObject, CardObject, CardObject];
 type StatusDisplay = {
   color: 'red' | 'blue' | '';
   text: 'Set found' | 'Incorrect set';
+  thinking: boolean;
 };
 
 type ModalState = {
