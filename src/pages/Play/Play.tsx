@@ -148,7 +148,7 @@ const Play = () => {
         boardCards={boardCards}
         toggleBuffer={toggleBuffer}
       />
-      <p>Sets possible: {numBoardSets}</p>
+      <p className="mt-3">Sets possible: {numBoardSets}</p>
       <p>Total cards left: {deck.length + boardCards.length}</p>
     </div>
   );

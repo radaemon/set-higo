@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 import { ModalState } from '../../types/types';
 import './styles.scss';
 
@@ -10,18 +11,21 @@ export default function Modal({ modalState }: Props) {
   let modalScenario;
   if (modalState.noSetsBoard === true) {
     modalScenario = (
-      <>
-        <h1>No sets available!</h1>
-        <button type="button">Shuffle cards</button>
-      </>
+      <div className="modalCase">
+        <h1 className="mb-4">
+          No sets <br />
+          available!
+        </h1>
+        <Button variant="primary">Shuffle cards</Button>
+      </div>
     );
   } else if (modalState.noSetsDeck === true) {
     modalScenario = (
-      <>
+      <div className="modalCase">
         <h1>You win!</h1>
         <p>You found all the sets in {modalState.seconds} seconds</p>
-        <button type="button">Play again</button>
-      </>
+        <Button variant="primary">Play again</Button>
+      </div>
     );
   } else {
     modalScenario = <></>;
