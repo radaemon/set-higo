@@ -10,7 +10,7 @@ type Props = {
 export default function InformativeContainer({ color, children }: Props) {
   return (
     <div className={`informative-container ${color}`}>
-      <p>{children}</p>
+      <p className="mb-0">{children}</p>
     </div>
   );
 }

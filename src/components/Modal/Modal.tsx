@@ -5,9 +5,15 @@ import './styles.scss';
 
 type Props = {
   modalState: ModalState;
+  playAgain: () => void;
+  reshuffleBoard: () => void;
 };
 
-export default function Modal({ modalState }: Props) {
+export default function Modal({
+  modalState,
+  playAgain,
+  reshuffleBoard,
+}: Props) {
   let modalScenario;
   if (modalState.noSetsBoard === true) {
     modalScenario = (
@@ -24,7 +30,9 @@ export default function Modal({ modalState }: Props) {
       <div className="modalCase">
         <h1>You win!</h1>
         <p>You found all the sets in {modalState.seconds} seconds</p>
-        <Button variant="primary">Play again</Button>
+        <Button onClick={playAgain} variant="primary">
+          Play again
+        </Button>
       </div>
     );
   } else {

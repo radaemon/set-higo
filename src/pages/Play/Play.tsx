@@ -33,13 +33,21 @@ const Play = () => {
   }, [boardCards]);
 
   useEffect(() => {
-    dealGame();
+    startGame();
   }, []);
 
-  function dealGame() {
-    const [...copyDeck] = shuffleDeck();
-    setBoardCards(copyDeck.splice(0, 12));
-    setDeck(copyDeck);
+  function startGame() {
+    const newDeck = createDeck();
+    const shuffledDeck = shuffleDeck(newDeck);
+    setBoardCards(shuffledDeck.splice(0, 12));
+    setDeck(shuffledDeck);
+  }
+
+  function reshuffleBoard() {
+    const allCards = [...deck, ...boardCards];
+    const shuffledCards = shuffleDeck(allCards);
+    setBoardCards(shuffledCards.splice(0, 12));
+    setDeck(shuffledCards);
   }
 
   function checkNoBoardSetsModal() {
@@ -54,15 +62,15 @@ const Play = () => {
       setStateModal({ ...stateModal, noSetsBoard: true, seconds: timer });
   }
 
-  function shuffleDeck() {
-    const [...arr] = [...deck, ...boardCards];
-    for (let i = deck.length - 1; i > 0; i--) {
-      const randomInteger = Math.floor(Math.random() * deck.length);
-      const temp = arr[i];
-      arr[i] = arr[randomInteger];
-      arr[randomInteger] = temp;
+  function shuffleDeck(deckOfCards: CardObject[]) {
+    const [...copyDeck] = deckOfCards;
+    for (let i = copyDeck.length - 1; i > 0; i--) {
+      const randomInteger = Math.floor(Math.random() * copyDeck.length);
+      const temp = copyDeck[i];
+      copyDeck[i] = copyDeck[randomInteger];
+      copyDeck[randomInteger] = temp;
     }
-    return arr;
+    return copyDeck;
   }
 
   function dealSet(bufferIndices: [number, number, number]) {
@@ -139,7 +147,11 @@ const Play = () => {
     <div
       style={{ display: 'flex', flexDirection: 'column', marginTop: '100px' }}
     >
-      <Modal modalState={stateModal} />
+      <Modal
+        reshuffleBoard={reshuffleBoard}
+        playAgain={startGame}
+        modalState={stateModal}
+      />
       <InformativeContainer color={statusDisplay.color}>
         {statusDisplay.text}
       </InformativeContainer>

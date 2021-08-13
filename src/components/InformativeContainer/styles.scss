@@ -1,8 +1,11 @@
 .informative-container {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   width: 350px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 5px;
-  text-align: center;
   visibility: hidden;
   &.red {
     background-color: #f7d7da;
@@ -14,5 +17,8 @@
     background-color: #cde5fe;
     visibility: visible;
     color: #4f779f;
+  }
+  p {
+    text-align: center;
   }
 }
