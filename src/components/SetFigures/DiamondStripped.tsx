@@ -5,7 +5,7 @@ type Props = {
   quantity: number;
 };
 
-export default function DiamondStriped({ color, quantity }: Props) {
+export default function DiamondStripped({ color, quantity }: Props) {
   const figure = (idx: number) => (
     <svg
       key={idx}

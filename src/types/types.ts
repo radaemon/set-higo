@@ -1,12 +1,12 @@
-import DiamondOutlined from '../components/SetFigures/DiamondOutlined';
-import DiamondSolid from '../components/SetFigures/DiamondSolid';
-import DiamondStriped from '../components/SetFigures/DiamondStriped';
-import OvalOutlined from '../components/SetFigures/OvalOutlined';
-import OvalSolid from '../components/SetFigures/OvalSolid';
-import OvalStriped from '../components/SetFigures/OvalStriped';
-import SquiggleOutlined from '../components/SetFigures/SquiggleOutlined';
-import SquiggleSolid from '../components/SetFigures/SquiggleSolid';
-import SquiggleStriped from '../components/SetFigures/SquiggleStriped';
+import DiamondOutlined from '../components/SetFigures/DiamondOutlinedd';
+import DiamondSolid from '../components/SetFigures/DiamondSolidd';
+import DiamondStripped from '../components/SetFigures/DiamondStripped';
+import OvalOutlined from '../components/SetFigures/OvalOutlinedd';
+import OvalSolid from '../components/SetFigures/OvalSolidd';
+import OvalStriped from '../components/SetFigures/OvalStripedd';
+import SquiggleOutlined from '../components/SetFigures/SquiggleOutlinedd';
+import SquiggleSolid from '../components/SetFigures/SquiggleSolidd';
+import SquiggleStriped from '../components/SetFigures/SquiggleStripedd';
 
 type CardObject = {
   color: 1 | 2 | 3;
@@ -36,7 +36,7 @@ const components = {
   '13': OvalStriped,
   '21': DiamondSolid,
   '22': DiamondOutlined,
-  '23': DiamondStriped,
+  '23': DiamondStripped,
   '31': SquiggleSolid,
   '32': SquiggleOutlined,
   '33': SquiggleStriped,
